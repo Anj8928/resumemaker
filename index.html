@@ -2,7 +2,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Professional Portfolio Maker</title>
+<title>Professional Resume Maker</title>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 <style>
 body, html {margin:0; padding:0; font-family:'Montserrat', sans-serif; background:#0b0c1b; color:#fff;}
@@ -50,7 +50,7 @@ section{padding:120px 50px;}
 </head>
 <body>
 <header>
-<h1>Professional Portfolio</h1>
+<h1>Professional Resume maker</h1>
 <nav>
 <a href="#home">Home</a>
 <a href="#about">About</a>
@@ -64,7 +64,7 @@ section{padding:120px 50px;}
 </div>
 <section class="about" id="about">
 <h2>About</h2>
-<p>Create your professional portfolio with live preview, multiple template designs, images, and downloadable PDF.</p>
+<p>Create your professional Resume with live preview, multiple template designs, images, and downloadable PDF.</p>
 </section>
 <section class="form-section" id="form">
 <h2>Fill Your Details</h2>
@@ -189,4 +189,5 @@ downloadBtn.addEventListener('click',()=>{
 });// Save to Gallery const saveBtn=document.getElementById('saveResume'); const galleryContainer=document.getElementById('galleryContainer'); saveBtn.addEventListener('click',()=>{ let activeTemplate; templates.forEach(t=>{ if(document.getElementById('template'+t).style.display=='flex') activeTemplate=document.getElementById('template'+t); }); if(activeTemplate){ let data=activeTemplate.innerHTML; let key='resume_'+Date.now(); localStorage.setItem(key, data); addGalleryItem(key, data); alert('Resume saved to gallery!'); } else { alert('Please select a template first!'); } }); function addGalleryItem(key, data){ let div=document.createElement('div'); div.className='gallery-item'; div.innerHTML=<img src='https://via.placeholder.com/150x80'><span>${key}</span>; div.addEventListener('click',()=>{ preview.innerHTML=''; let tempDiv=document.createElement('div'); tempDiv.className='template'; tempDiv.style.display='flex'; tempDiv.innerHTML=data; preview.appendChild(tempDiv); }); galleryContainer.appendChild(div); } // Load saved resumes for(let i=0;i<localStorage.length;i++){ let key=localStorage.key(i); if(key.startsWith('resume_')){ addGalleryItem(key, localStorage.getItem(key)); } } </script>
 
 </body>
+
 </html>
