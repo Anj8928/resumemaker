@@ -1,0 +1,192 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Professional Portfolio Maker</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+<style>
+body, html {margin:0; padding:0; font-family:'Montserrat', sans-serif; background:#0b0c1b; color:#fff;}
+header{position:fixed; top:0; width:100%; background:rgba(0,0,0,0.85); color:#fff; padding:15px 50px; display:flex; justify-content:space-between; align-items:center; z-index:1000;}
+header h1{font-size:24px;}
+nav a{margin-left:20px; color:#fff; text-decoration:none; font-weight:500;}
+nav a:hover{color:#facc15;}
+.front-page{position:relative; height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; overflow:hidden; text-align:center;}
+.front-page h2{font-size:48px; text-shadow:0 0 10px #facc15,0 0 20px #facc15; animation:fadeIn 3s ease-in-out;}
+@keyframes fadeIn{0%{opacity:0;}100%{opacity:1;}}
+.star{position:absolute; background:#fff; border-radius:50%; width:2px; height:2px; animation:twinkle 2s infinite;}
+@keyframes twinkle{0%,100%{opacity:0.2;}50%{opacity:1;}}
+section{padding:120px 50px;}
+.about h2, .form-section h2, .templates h2, .gallery-section h2{font-size:36px; margin-bottom:30px; text-align:center; color:#facc15; animation:fadeIn 2s ease-in;}
+.about p{text-align:center; max-width:800px; margin:0 auto; font-size:18px;}
+.form-section form{max-width:500px; margin:0 auto; background:#111; padding:25px; border-radius:10px; box-shadow:0 0 15px #facc15; color:#fff;}
+.form-section input, .form-section textarea{width:100%; padding:10px 12px; margin-bottom:12px; border:none; border-radius:5px; background:#222; color:#fff; font-size:15px; transition:0.3s;}
+.form-section input::placeholder, .form-section textarea::placeholder{color:#bbb;}
+.form-section input:focus, .form-section textarea:focus{background:#333;}
+.form-section button{width:100%; padding:12px; background:#facc15; border:none; border-radius:5px; font-size:16px; font-weight:700; cursor:pointer; color:#111; transition:0.3s;}
+.form-section button:hover{background:#eab308; transform:scale(1.02);}
+.templates-container{display:flex; gap:15px; flex-wrap:nowrap;}
+.sidebar{width:250px; background:#222; padding:15px; border-radius:10px; flex-shrink:0; height:calc(100vh - 120px); overflow-y:auto; position:sticky; top:120px;}
+.sidebar h3{margin-bottom:15px; color:#facc15;}
+.template-card{margin-bottom:15px; padding:8px; border-radius:6px; cursor:pointer; text-align:center; transition:0.3s; border:2px solid #444; background:linear-gradient(135deg,#222,#333);}
+.template-card:hover{transform:scale(1.03); border-color:#facc15; box-shadow:0 0 12px #facc15,0 0 25px #ffcc00;}
+.template-card img{width:100%; height:60px; object-fit:cover; border-radius:4px; margin-bottom:5px;}
+.template-card span{font-weight:600; display:block; color:#facc15; font-size:14px;}
+.template-preview{flex:1; min-height:500px; max-height:calc(100vh - 120px); background:#111; border-radius:10px; padding:15px; box-shadow:0 0 20px #facc15,0 0 35px #ffcc00; color:#fff; display:flex; flex-direction:column; gap:10px; overflow-y:auto; transition:0.5s;}
+.template{display:none; flex-direction:column; gap:10px; padding:12px; border-radius:10px; box-shadow:0 0 15px #facc15,0 0 30px #ffcc00;}
+.template-header{display:flex; align-items:flex-start; gap:10px;}
+.template-header img{width:80px; height:80px; border-radius:50%; object-fit:cover; border:2px solid #facc15;}
+.info-container{display:flex; flex-wrap:wrap; gap:8px; margin-top:5px;}
+.info-box{flex:1 1 calc(50% - 8px); background:rgba(34,34,34,0.85); padding:8px; border-radius:6px; box-shadow:0 0 8px #facc15; min-width:100px; transition:0.3s;}
+.info-box:hover{box-shadow:0 0 15px #facc15,0 0 25px #ffcc00;}
+.info-box h4{margin:0 0 3px 0; color:#facc15; font-size:13px;}
+.info-box p{margin:0; font-size:12px; color:#fff;}
+.gallery-section{padding:50px;}
+.gallery-container{display:flex; flex-wrap:wrap; gap:12px; justify-content:center;}
+.gallery-item{width:150px; height:200px; border-radius:10px; background:#222; box-shadow:0 0 10px #facc15; cursor:pointer; overflow:hidden; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:5px;}
+.gallery-item img{width:100%; height:80px; object-fit:cover; border-radius:6px; margin-bottom:5px;}
+.gallery-item span{font-size:12px; color:#facc15; text-align:center;}
+@media(max-width:900px){.templates-container{flex-direction:column;}.sidebar{width:100%; height:auto; max-height:300px; position:relative; top:0;}}
+</style>
+</head>
+<body>
+<header>
+<h1>Professional Portfolio</h1>
+<nav>
+<a href="#home">Home</a>
+<a href="#about">About</a>
+<a href="#form">Your Details</a>
+<a href="#templates">Templates</a>
+<a href="#gallery">Gallery</a>
+</nav>
+</header>
+<div class="front-page" id="home">
+<h2>Welcome to Your Animated Portfolio</h2>
+</div>
+<section class="about" id="about">
+<h2>About</h2>
+<p>Create your professional portfolio with live preview, multiple template designs, images, and downloadable PDF.</p>
+</section>
+<section class="form-section" id="form">
+<h2>Fill Your Details</h2>
+<form id="portfolioForm">
+<input type="text" id="fullName" placeholder="Full Name" required>
+<input type="email" id="email" placeholder="Email" required>
+<input type="text" id="phone" placeholder="Phone" required>
+<textarea id="bio" placeholder="Short Bio" rows="3" required></textarea>
+<input type="text" id="skills" placeholder="Skills (comma separated)">
+<input type="text" id="experience" placeholder="Experience (comma separated)">
+<input type="text" id="education" placeholder="Education (comma separated)">
+<input type="text" id="projects" placeholder="Projects (comma separated)">
+<input type="text" id="social" placeholder="Social Links">
+<input type="text" id="awards" placeholder="Awards/Certifications">
+<input type="text" id="languages" placeholder="Languages">
+<input type="text" id="hobbies" placeholder="Hobbies/Interests">
+<input type="file" id="profilePicUpload" accept="image/*">
+<button type="submit">Generate Portfolio</button>
+<button type="button" id="saveResume">Save to Gallery</button>
+</form>
+</section>
+<section class="templates" id="templates">
+<h2>Templates</h2>
+<div class="templates-container">
+<div class="sidebar">
+<h3>Select Template</h3>
+<script>
+for(let i=1;i<=10;i++){
+  document.write(`<div class="template-card" data-template="${i}"><img src="https://via.placeholder.com/220x80/${i}a2f2a?text=Design+${i}"><span>Template ${i}</span></div>`);
+}
+</script>
+<button id="downloadPDF">Download PDF</button>
+</div>
+<div class="template-preview" id="templatePreview"></div>
+</div>
+</section>
+<section class="gallery-section" id="gallery">
+<h2>Saved Resumes</h2>
+<div class="gallery-container" id="galleryContainer"></div>
+</section>
+<footer>&copy; 2026 Professional Portfolio</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script>
+const frontPage=document.querySelector('.front-page');
+for(let i=0;i<100;i++){
+  let star=document.createElement('div');
+  star.className='star';
+  star.style.top=Math.random()*100+'%';
+  star.style.left=Math.random()*100+'%';
+  star.style.width=Math.random()*2+'px';
+  star.style.height=star.style.width;
+  star.style.animationDuration=(1+Math.random()*3)+'s';
+  frontPage.appendChild(star);
+}
+const templates=[];
+for(let i=1;i<=10;i++) templates.push(i);
+const preview=document.getElementById('templatePreview');
+templates.forEach(t=>{
+  let div=document.createElement('div');
+  div.classList.add('template','template-'+t);
+  div.id='template'+t;
+  div.innerHTML=`<div class="template-header" style="border-left:5px solid hsl(${t*30},70%,50%); padding-left:10px; background:linear-gradient(135deg, hsl(${t*30},40%,10%), hsl(${t*30},30%,20%));">
+<img id="pic${t}" src="https://via.placeholder.com/80">
+<div class="info-container">
+<div class="info-box"><h4>Email</h4><p id="email${t}"></p></div>
+<div class="info-box"><h4>Phone</h4><p id="phone${t}"></p></div>
+<div class="info-box"><h4>Bio</h4><p id="bio${t}"></p></div>
+<div class="info-box"><h4>Skills</h4><p id="skills${t}"></p></div>
+<div class="info-box"><h4>Experience</h4><p id="exp${t}"></p></div>
+<div class="info-box"><h4>Education</h4><p id="edu${t}"></p></div>
+<div class="info-box"><h4>Projects</h4><p id="proj${t}"></p></div>
+<div class="info-box"><h4>Social Links</h4><p id="social${t}"></p></div>
+<div class="info-box"><h4>Awards</h4><p id="awards${t}"></p></div>
+<div class="info-box"><h4>Languages</h4><p id="lang${t}"></p></div>
+<div class="info-box"><h4>Hobbies</h4><p id="hobbies${t}"></p></div>
+</div>
+</div>`;
+  preview.appendChild(div);
+});
+const form=document.getElementById('portfolioForm');
+const profilePicUpload=document.getElementById('profilePicUpload');
+form.addEventListener('input',()=>{
+  templates.forEach(t=>{
+    document.getElementById('email'+t).textContent=form.email.value||'';
+    document.getElementById('phone'+t).textContent=form.phone.value||'';
+    document.getElementById('bio'+t).textContent=form.bio.value||'';
+    document.getElementById('skills'+t).textContent=form.skills.value||'';
+    document.getElementById('exp'+t).textContent=form.experience.value||'';
+    document.getElementById('edu'+t).textContent=form.education.value||'';
+    document.getElementById('proj'+t).textContent=form.projects.value||'';
+    document.getElementById('social'+t).textContent=form.social.value||'';
+    document.getElementById('awards'+t).textContent=form.awards.value||'';
+    document.getElementById('lang'+t).textContent=form.languages.value||'';
+    document.getElementById('hobbies'+t).textContent=form.hobbies.value||'';
+  });
+});
+profilePicUpload.addEventListener('change',(e)=>{
+  const reader=new FileReader();
+  reader.onload=function(){
+    templates.forEach(t=>document.getElementById('pic'+t).src=reader.result);
+  };
+  reader.readAsDataURL(e.target.files[0]);
+});
+document.querySelectorAll('.template-card').forEach(card=>{
+  card.addEventListener('click',()=>{
+    let t=card.getAttribute('data-template');
+    templates.forEach(tp=>document.getElementById('template'+tp).style.display='none');
+    document.getElementById('template'+t).style.display='flex';
+  });
+});
+// PDF download button
+const downloadBtn=document.getElementById('downloadPDF');
+downloadBtn.addEventListener('click',()=>{
+  let activeTemplate;
+  templates.forEach(t=>{
+    if(document.getElementById('template'+t).style.display=='flex') activeTemplate=document.getElementById('template'+t);
+  });
+  if(activeTemplate){
+    var opt = { margin:0.2, filename:'Portfolio.pdf', image:{ type:'jpeg', quality:0.98 }, html2canvas:{ scale:2, useCORS:true }, jsPDF:{ unit:'in', format:'a4', orientation:'portrait' } };
+    html2pdf().set(opt).from(activeTemplate).save();
+  } else { alert('Please select a template first!'); }
+});// Save to Gallery const saveBtn=document.getElementById('saveResume'); const galleryContainer=document.getElementById('galleryContainer'); saveBtn.addEventListener('click',()=>{ let activeTemplate; templates.forEach(t=>{ if(document.getElementById('template'+t).style.display=='flex') activeTemplate=document.getElementById('template'+t); }); if(activeTemplate){ let data=activeTemplate.innerHTML; let key='resume_'+Date.now(); localStorage.setItem(key, data); addGalleryItem(key, data); alert('Resume saved to gallery!'); } else { alert('Please select a template first!'); } }); function addGalleryItem(key, data){ let div=document.createElement('div'); div.className='gallery-item'; div.innerHTML=<img src='https://via.placeholder.com/150x80'><span>${key}</span>; div.addEventListener('click',()=>{ preview.innerHTML=''; let tempDiv=document.createElement('div'); tempDiv.className='template'; tempDiv.style.display='flex'; tempDiv.innerHTML=data; preview.appendChild(tempDiv); }); galleryContainer.appendChild(div); } // Load saved resumes for(let i=0;i<localStorage.length;i++){ let key=localStorage.key(i); if(key.startsWith('resume_')){ addGalleryItem(key, localStorage.getItem(key)); } } </script>
+
+</body>
+</html>
